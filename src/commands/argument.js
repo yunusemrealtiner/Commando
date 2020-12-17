@@ -1,6 +1,7 @@
 const { escapeMarkdown } = require('discord.js');
 const { oneLine, stripIndents } = require('common-tags');
 const ArgumentUnionType = require('../types/union');
+const Discord = require('discord.js');
 
 /** A fancy argument */
 class Argument {
@@ -177,7 +178,11 @@ class Argument {
 				};
 			}
 
-			// Prompt the user for a new value
+			const embed = new Discord.MessageEmbed()
+                        .setColor(0xFF0000)
+                        .setTitle()
+                        .addField()
+                        .setTimestamp()
 			prompts.push(await msg.reply(stripIndents`
 				${empty ? this.prompt : valid ? valid : `You provided an invalid ${this.label}. Please try again.`}
 				${oneLine`
@@ -206,7 +211,7 @@ class Argument {
 			}
 
 			// See if they want to cancel
-			if(val.toLowerCase() === 'cancel') {
+			if(val.toLowerCase() === 'iptal') {
 				return {
 					value: null,
 					cancelled: 'user',
